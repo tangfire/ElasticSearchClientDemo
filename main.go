@@ -219,3 +219,26 @@ func updateDocument2(client *elasticsearch.TypedClient) {
 	}
 	fmt.Printf("result:%v\n", resp.Result)
 }
+
+// deleteDocument 删除 document
+func deleteDocument(client *elasticsearch.TypedClient) {
+	resp, err := client.Delete("my-review-1", "1").
+		Do(context.Background())
+	if err != nil {
+		fmt.Printf("delete document failed, err:%v\n", err)
+		return
+	}
+	fmt.Printf("result:%v\n", resp.Result)
+}
+
+// deleteIndex 删除 index
+func deleteIndex(client *elasticsearch.TypedClient) {
+	resp, err := client.Indices.
+		Delete("my-review-1").
+		Do(context.Background())
+	if err != nil {
+		fmt.Printf("delete document failed, err:%v\n", err)
+		return
+	}
+	fmt.Printf("Acknowledged:%v\n", resp.Acknowledged)
+}
